@@ -6,5 +6,6 @@ namespace RBT
 	struct Component
 	{
 		Entity* entity;
+		virtual ~Component() = 0;
 	};
 }

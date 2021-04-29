@@ -30,7 +30,7 @@ void RBT::Engine::Update()
 	window->Update();
 	for (int s = 0; s < this->systems.size(); s++)
 	{
-		std::cout << "Update" << std::endl;
+		systems[s]->Update(this->world);
 	}
 }
 
