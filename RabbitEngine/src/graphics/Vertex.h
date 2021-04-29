@@ -2,7 +2,7 @@
 #include "glm/glm.hpp"
 namespace RBT
 {
-	struct __declspec(dllexport) Vertex
+	struct Vertex
 	{
 		glm::vec3 Position;
 		glm::vec3 Normal;

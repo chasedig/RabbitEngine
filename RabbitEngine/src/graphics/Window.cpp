@@ -3,21 +3,19 @@
 namespace RBT
 {
 
-	Window::Window(const char* title, int width, int height)
+	Window::Window(Camera* camera, const char* title, int width, int height)
 	{
 		this->width = width;
 		this->height = height;
 		this->title = title;
 		this->window = 0;
-		this->renderer = NULL;
-		this->camera = new Camera(70, 1, 10);
+		this->camera = camera;
 	}
 
 	void Window::Run()
 	{
 		std::cout << "Initializing window" << std::endl;
 		this->init();
-		this->loop();
 	}
 
 
@@ -64,7 +62,6 @@ namespace RBT
 
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-		this->renderer = new Renderer(this, camera);
 	}
 
 	float Window::getAspectRatio()
@@ -72,18 +69,14 @@ namespace RBT
 		return this->width / this->height;
 	}
 
-	void Window::loop()
+	void Window::Update()
 	{
 		glClearColor(0.0f, 0.5f, 1.0f, 1.0f);
-		while (!glfwWindowShouldClose(window))
-		{
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glViewport(0, 0, this->width, this->height);
-			renderer->Render();
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glViewport(0, 0, this->width, this->height);
 
-			glfwSwapBuffers(window);
-			glfwPollEvents();
-		}
+		glfwSwapBuffers(window);
+		glfwPollEvents();
 	}
 
 	void Window::WindowResizeCallback(GLFWwindow* window, int width, int height)

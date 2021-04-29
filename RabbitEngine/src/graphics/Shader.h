@@ -4,7 +4,7 @@
 #include "glm/gtc/type_ptr.hpp"
 namespace RBT
 {
-	class __declspec(dllexport) Shader
+	class Shader
 	{
 		public:
 			int program;

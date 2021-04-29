@@ -3,7 +3,7 @@
 #include <vector>
 namespace RBT
 {
-	class __declspec(dllexport) Mesh
+	class Mesh
 	{
 		public:
 			unsigned int VAO, VBO;

@@ -1,12 +1,23 @@
 #pragma once
-#include <graphics/Window.h>
+#include "graphics/Window.h"
+#include "World.h"
+#include "systems/System.h"
+#include <thread>
 
 namespace RBT
 {
-	class __declspec(dllexport) Engine
+	class Engine
 	{
 		public:
-			Engine(Window* window);
+			Engine();
+			void Run();
+			void Update();
+			std::vector<System*> systems;
 			Window* window;
+			World* world;
+			Camera* camera;
+		private:
+			void InitializeSystems();
+			std::thread* updateThread;
 	};
 }
