@@ -130,6 +130,9 @@
       <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\Chase\source\repos\RabbitEngine\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
+    <PostBuildEvent>
+      <Command>XCOPY "$(SolutionDir)Resources\shaders" "$(TargetDir)shaders\" /E /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -153,33 +156,38 @@
       <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\Chase\source\repos\RabbitEngine\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
+    <PostBuildEvent>
+      <Command>XCOPY "$(SolutionDir)Resources\shaders" "$(TargetDir)shaders\" /E /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\include\glad\glad.c" />
-    <ClCompile Include="src\Entity.cpp" />
-    <ClCompile Include="src\World.cpp" />
+    <ClCompile Include="src\core\Entity.cpp" />
+    <ClCompile Include="src\core\World.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\graphics\Camera.cpp" />
     <ClCompile Include="src\graphics\Mesh.cpp" />
-    <ClCompile Include="src\systems\RendererSystem.cpp" />
+    <ClCompile Include="src\graphics\RendererSystem.cpp" />
     <ClCompile Include="src\graphics\Shader.cpp" />
-    <ClCompile Include="src\graphics\Window.cpp" />
+    <ClCompile Include="src\core\Window.cpp" />
+    <ClCompile Include="src\RabbitEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\components\Component.h" />
-    <ClInclude Include="src\components\Transform.h" />
-    <ClInclude Include="src\components\Renderer.h" />
+    <ClInclude Include="src\components\TransformComponent.h" />
+    <ClInclude Include="src\components\RendererComponent.h" />
     <ClInclude Include="src\components\MeshComponent.h" />
-    <ClInclude Include="src\Entity.h" />
-    <ClInclude Include="src\World.h" />
+    <ClInclude Include="src\core\Entity.h" />
+    <ClInclude Include="src\core\Logger.h" />
+    <ClInclude Include="src\core\World.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\graphics\Camera.h" />
     <ClInclude Include="src\graphics\Mesh.h" />
-    <ClInclude Include="src\systems\RendererSystem.h" />
+    <ClInclude Include="src\graphics\RendererSystem.h" />
     <ClInclude Include="src\graphics\Shader.h" />
     <ClInclude Include="src\graphics\Vertex.h" />
-    <ClInclude Include="src\graphics\Window.h" />
-    <ClInclude Include="src\systems\System.h" />
+    <ClInclude Include="src\core\Window.h" />
+    <ClInclude Include="src\core\System.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

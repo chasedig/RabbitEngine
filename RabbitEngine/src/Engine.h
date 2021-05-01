@@ -1,7 +1,7 @@
 #pragma once
-#include "graphics/Window.h"
-#include "World.h"
-#include "systems/System.h"
+#include "core/Window.h"
+#include <core/World.h>
+#include <core/System.h>
 #include <thread>
 
 namespace RBT
@@ -18,6 +18,5 @@ namespace RBT
 			Camera* camera;
 		private:
 			void InitializeSystems();
-			std::thread* updateThread;
 	};
 }

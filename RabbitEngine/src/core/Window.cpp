@@ -3,6 +3,8 @@
 namespace RBT
 {
 
+	void debugMessage(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
+
 	Window::Window(Camera* camera, const char* title, int width, int height)
 	{
 		this->width = width;
@@ -60,6 +62,12 @@ namespace RBT
 			return;
 		}
 
+		glEnable(GL_DEBUG_OUTPUT);
+		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+		glDebugMessageCallback(debugMessage, NULL);
+
+		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, GL_TRUE);
+
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	}
@@ -69,14 +77,14 @@ namespace RBT
 		return this->width / this->height;
 	}
 
-	void Window::Update()
+	int Window::getWidth()
 	{
-		glClearColor(0.0f, 0.5f, 1.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glViewport(0, 0, this->width, this->height);
+		return this->width;
+	}
 
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+	int Window::getHeight()
+	{
+		return this->height;
 	}
 
 	void Window::WindowResizeCallback(GLFWwindow* window, int width, int height)
@@ -88,6 +96,11 @@ namespace RBT
 	void Window::CursorPositionCallback(GLFWwindow* window, double xpos, double ypos)
 	{
 		camera->ProcessMouseMovement(this->xpos - xpos, this->ypos - ypos, true);
+	}
+
+	void debugMessage(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+	{
+		std::cout << message << std::endl;
 	}
 
 

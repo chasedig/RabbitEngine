@@ -1,10 +1,11 @@
 #pragma once
 #include <vector>
-#include "graphics/Mesh.h"
-#include "graphics/Shader.h"
-#include "graphics/Camera.h"
-#include "World.h"
-#include "System.h"
+#include <graphics/Mesh.h>
+#include <graphics/Shader.h>
+#include <graphics/Camera.h>
+#include <core/World.h>
+#include <core/System.h>
+
 namespace RBT
 {
 	class Window; // forward declaration

@@ -1,9 +1,9 @@
 #include "RendererSystem.h"
 #include "glad/glad.h"
-#include "graphics/Window.h"
+#include "core/Window.h"
 #include "components/MeshComponent.h"
-#include "components/Renderer.h"
-#include "components/Transform.h"
+#include "components/RendererComponent.h"
+#include "components/TransformComponent.h"
 namespace RBT
 {
 
@@ -28,21 +28,24 @@ namespace RBT
 		this->shader->setMat4Uniform("view", viewMatrix);
 
 
-
 		for (int e = 0; e < world->entities.size(); e++)
 		{
-			Entity entity = *world->entities[e];
-			Renderer* renderer = entity.GetComponent<Renderer>();
-			MeshComponent* meshComponent = entity.GetComponent<MeshComponent>();
-			Transform* transform = entity.GetComponent<Transform>();
+			Entity* entity = world->entities[e];
+			RendererComponent* renderer = entity->GetComponent<RendererComponent>();
+			MeshComponent* meshComponent = entity->GetComponent<MeshComponent>();
+			TransformComponent* transform = entity->GetComponent<TransformComponent>();
+
 			if (renderer && meshComponent && transform)
 			{
-				Mesh* mesh = meshComponent->mesh;
-				glm::mat4 modelMatrix = mesh->modelMatrix;
-				this->shader->setMat4Uniform("model", modelMatrix);
-				glBindVertexArray(mesh->VAO);
-				glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh->vertices.size());
-				glBindVertexArray(0);
+				if (renderer->enabled == true)
+				{
+					Mesh mesh = *meshComponent->mesh;
+					glm::mat4 modelMatrix = transform->transform;
+					this->shader->setMat4Uniform("model", modelMatrix);
+					glBindVertexArray(mesh.VAO);
+					glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh.vertices.size());
+					glBindVertexArray(0);
+				}
 			}
 		}
 		shader->unbind();

@@ -6,6 +6,7 @@ namespace RBT
 	struct Component
 	{
 		Entity* entity;
-		virtual ~Component() = 0;
+		virtual ~Component() {};
+		const char* c = "hi";
 	};
 }

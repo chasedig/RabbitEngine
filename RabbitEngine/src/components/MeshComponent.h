@@ -7,6 +7,10 @@ namespace RBT
 {
 	struct MeshComponent : Component
 	{
+		MeshComponent(Mesh* mesh)
+		{
+			this->mesh = mesh;
+		}
 		Mesh* mesh;
 	};
 }

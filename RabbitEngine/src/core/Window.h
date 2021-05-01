@@ -3,7 +3,7 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <glfw/glfw3.h>
-#include "Camera.h"
+#include <graphics/Camera.h>
 namespace RBT
 {
 	class Window
@@ -11,11 +11,12 @@ namespace RBT
 		public:
 			Window(Camera* camera, const char* title, int width, int height);
 			void Run();
-			void Update();
 			float getAspectRatio();
+			int getWidth();
+			int getHeight();
 			GLFWwindow* window;
-			void setTitle(const char* title) { this->title = title; }
-			void setDimensions(int width, int height) { this->width = width; this->height = height; }
+			void setTitle(const char* title) { this->title = title; glfwSetWindowTitle(this->window, this->title); }
+			void setDimensions(int width, int height) { this->width = width; this->height = height; glfwSetWindowSize(this->window, this->width, this->height); }
 		private:
 			Camera* camera;
 			int width;

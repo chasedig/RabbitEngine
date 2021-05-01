@@ -30,7 +30,7 @@ namespace RBT
 		{
 			char infoLog[INFO_LOG_BUFFER_SIZE];
 			glGetProgramInfoLog(program, INFO_LOG_BUFFER_SIZE, NULL, infoLog);
-			std::cout << "Shader linking error with program ID " << program << ":" << infoLog;
+			std::cout << "Shader linking error with program ID " << program << ": " << infoLog << std::endl;
 		}
 
 	}
@@ -69,7 +69,7 @@ namespace RBT
 		{
 			char infoLog[INFO_LOG_BUFFER_SIZE];
 			glGetShaderInfoLog(shaderId, INFO_LOG_BUFFER_SIZE, NULL, infoLog);
-			std::cout << "Shader compilation failed for '" << filename << "'" << "with error" << infoLog;
+			std::cout << "Shader compilation failed for '" << filename << "'" << " with error " << infoLog << std::endl;
 		}
 	}
 

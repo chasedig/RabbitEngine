@@ -1,37 +1,40 @@
 #include "Engine.h"
-#include "World.h"
 
 // SYSTEMS INCLUDE
-#include "systems/RendererSystem.h"
+#include <graphics/RendererSystem.h>
+#include <core/Logger.h>
 
 RBT::Engine::Engine()
 {
-	std::cout << "RabbitEngine Starting... \n";
+	Logger::Log("RabbitEngine Starting...");
 	this->world = new World();
 	this->camera = new Camera(70, 1, 10);
 	this->window = new Window(camera, "RabbitEngine", 1080, 640);
-	this->Run();
+	this->window->Run(); // I put it in the run function and I kept getting glGenVertexArrays errors because the window was not yet initialized!
+	this->InitializeSystems();
 }
 
 void RBT::Engine::Run()
 {
-	this->updateThread = new std::thread([this]() {
-		this->window->Run();
-		while (!glfwWindowShouldClose(window->window))
-		{
-			this->Update();
-		}
-	});
-	updateThread->join();
+	while (!glfwWindowShouldClose(window->window))
+	{
+		this->Update();
+	}
 }
 
 void RBT::Engine::Update()
 {
-	window->Update();
+	glClearColor(0.0f, 0.5f, 1.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glViewport(0, 0, window->getWidth(), window->getHeight());
+
 	for (int s = 0; s < this->systems.size(); s++)
 	{
 		systems[s]->Update(this->world);
 	}
+
+	glfwSwapBuffers(this->window->window);
+	glfwPollEvents();
 }
 
 void RBT::Engine::InitializeSystems()
