@@ -24,10 +24,6 @@ void RBT::Engine::Run()
 
 void RBT::Engine::Update()
 {
-	glClearColor(0.0f, 0.5f, 1.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glViewport(0, 0, window->getWidth(), window->getHeight());
-
 	for (int s = 0; s < this->systems.size(); s++)
 	{
 		systems[s]->Update(this->world);

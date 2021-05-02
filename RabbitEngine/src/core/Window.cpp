@@ -78,7 +78,7 @@ namespace RBT
 
 	float Window::getAspectRatio()
 	{
-		return this->width / this->height;
+		return (float)this->width / (float)this->height; // Cast to float! Damn integer division is at it again...
 	}
 
 	int Window::getWidth()
@@ -113,7 +113,10 @@ namespace RBT
 
 	void debugMessage(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 	{
-		std::cout << message << std::endl;
+		if (severity == GL_DEBUG_SEVERITY_HIGH)
+		{
+			std::cout << message << std::endl;
+		}
 	}
 
 
