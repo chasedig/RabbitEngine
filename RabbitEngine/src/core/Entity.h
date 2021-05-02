@@ -17,10 +17,13 @@ namespace RBT
 		template<typename ComponentType>
 		ComponentType* GetComponent()
 		{
-			ComponentType* derived = dynamic_cast<ComponentType*>(components[typeid(ComponentType)]);
-			if (derived)
+			if (components[typeid(ComponentType)])
 			{
-				return derived;
+				ComponentType* derived = dynamic_cast<ComponentType*>(components[typeid(ComponentType)]);
+				if (derived)
+				{
+					return derived;
+				}
 			}
 			return NULL;
 		}
@@ -43,11 +46,12 @@ namespace RBT
 			ComponentType* existingComponent = this->GetComponent<ComponentType>();
 			if (existingComponent)
 			{
-				//this->components:erase(typeid(ComponentType));
+				delete existingComponent;
+				components[typeid(ComponentType)] = NULL;
 			}
 		}
 
 		World* world;
-		std::map<std::type_index, Component*> components;
+		std::unordered_map<std::type_index, Component*> components;
 	};
 };

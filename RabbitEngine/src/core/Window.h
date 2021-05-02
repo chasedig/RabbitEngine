@@ -21,8 +21,9 @@ namespace RBT
 			Camera* camera;
 			int width;
 			int height;
-			double xpos = 0;
-			double ypos = 0;
+			double cursor_xpos = 0;
+			double cursor_ypos = 0;
+			bool cursor_set = false;
 			const char* title;
 			void init();
 			void WindowResizeCallback(GLFWwindow* window, int width, int height);

@@ -5,10 +5,14 @@ namespace RBT
 {
 	struct TransformComponent : Component
 	{
+		TransformComponent()
+		{
+			this->transform = glm::mat4(1.0f);
+		}
 		TransformComponent(glm::mat4 transform)
 		{
 			this->transform = transform;
 		}
-		glm::mat4 transform = glm::mat4(1.0f);
+		glm::mat4 transform;
 	};
 }

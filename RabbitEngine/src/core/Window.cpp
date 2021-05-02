@@ -51,7 +51,9 @@ namespace RBT
 			static_cast<Window*>(glfwGetWindowUserPointer(window))->CursorPositionCallback(window, xpos, ypos);
 		};
 
+
 		glfwSetWindowSizeCallback(window, resizeCallbackGLFWInterface);
+		glfwSetCursorPosCallback(window, cursorPositionCallbackGLFWInterface);
 
 		glfwMakeContextCurrent(window);
 
@@ -67,6 +69,8 @@ namespace RBT
 		glDebugMessageCallback(debugMessage, NULL);
 
 		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, GL_TRUE);
+
+		glfwSetWindowSizeLimits(window, 800, 500, GLFW_DONT_CARE, GLFW_DONT_CARE);
 
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
@@ -95,7 +99,16 @@ namespace RBT
 
 	void Window::CursorPositionCallback(GLFWwindow* window, double xpos, double ypos)
 	{
-		camera->ProcessMouseMovement(this->xpos - xpos, this->ypos - ypos, true);
+		if (cursor_set == true)
+		{
+			camera->ProcessMouseMovement(xpos - this->cursor_xpos, ypos - this->cursor_ypos, true);
+		}
+		else
+		{
+			cursor_set = true;
+		}
+		this->cursor_xpos = xpos;
+		this->cursor_ypos = ypos;
 	}
 
 	void debugMessage(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)

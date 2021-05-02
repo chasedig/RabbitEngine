@@ -8,7 +8,7 @@ RBT::Engine::Engine()
 {
 	Logger::Log("RabbitEngine Starting...");
 	this->world = new World();
-	this->camera = new Camera(70, 1, 10);
+	this->camera = new Camera(70, 1, 100);
 	this->window = new Window(camera, "RabbitEngine", 1080, 640);
 	this->window->Run(); // I put it in the run function and I kept getting glGenVertexArrays errors because the window was not yet initialized!
 	this->InitializeSystems();

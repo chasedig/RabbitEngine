@@ -22,7 +22,7 @@ namespace RBT
 			glm::vec3 right;
 			glm::vec3 up;
 
-			float yaw = 360;
-			float pitch = -90.0f;
+			float yaw = -90.0f;
+			float pitch = 0.0f;
 	};
 }
