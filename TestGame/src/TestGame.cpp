@@ -29,7 +29,7 @@ int main()
 			transform->transform = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -10));
 			transform->transform = glm::rotate(transform->transform, (float)glm::radians((float)x), glm::vec3(0, 1, 0));
 			transform->transform = glm::translate(transform->transform, glm::vec3(0, 0, 10));
-			transform->transform = glm::translate(transform->transform, glm::vec3(0, (rand() % 10 + -5) - 5, 0));
+			transform->transform = glm::translate(transform->transform, glm::vec3(0, (rand() % 100 + -50) - 5, 0));
 			entity->SetComponent(transform);
 			entity->SetComponent(new ColorMaterialComponent(Color(rand() / double(RAND_MAX), rand() / double(RAND_MAX), rand() / double(RAND_MAX))));
 			Sleep(1);
