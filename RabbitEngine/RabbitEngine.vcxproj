@@ -181,6 +181,7 @@
     <ClCompile Include="src\RabbitEngine.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\ColorMaterialComponent.h" />
     <ClInclude Include="src\components\Component.h" />
     <ClInclude Include="src\components\TransformComponent.h" />
     <ClInclude Include="src\components\RendererComponent.h" />
@@ -190,6 +191,7 @@
     <ClInclude Include="src\core\World.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\graphics\Camera.h" />
+    <ClInclude Include="src\graphics\Color.h" />
     <ClInclude Include="src\graphics\Mesh.h" />
     <ClInclude Include="src\graphics\RendererSystem.h" />
     <ClInclude Include="src\graphics\Shader.h" />

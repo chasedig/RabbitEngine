@@ -18,6 +18,6 @@ namespace RBT
 			Window* window;
 			Camera* camera;
 		private:
-			Shader* shader;
+			Shader* colorShader;
 	};
 }

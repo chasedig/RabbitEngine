@@ -11,12 +11,12 @@ namespace RBT
 		public:
 			Engine();
 			void Run();
-			void Update();
 			std::vector<System*> systems;
 			Window* window;
 			World* world;
 			Camera* camera;
 		private:
 			void InitializeSystems();
+			void Update();
 	};
 }

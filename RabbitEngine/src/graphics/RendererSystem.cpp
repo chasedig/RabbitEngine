@@ -4,6 +4,7 @@
 #include "components/MeshComponent.h"
 #include "components/RendererComponent.h"
 #include "components/TransformComponent.h"
+#include <components/ColorMaterialComponent.h>
 namespace RBT
 {
 
@@ -11,7 +12,7 @@ namespace RBT
 	{
 		this->window = window;
 		this->camera = camera;
-		this->shader = new Shader("vertex.glsl", "fragment.glsl");
+		this->colorShader = new Shader("vertex.glsl", "colorMaterial_frag.glsl");
 	}
 
 	void RendererSystem::Update(World* world)
@@ -22,13 +23,12 @@ namespace RBT
 		//glCullFace(GL_BACK);
 		//glEnable(GL_CULL_FACE);
 
-		shader->bind();
+		Shader* shader = NULL;
+
 
 		glm::mat4 projectionMatrix = glm::perspective(camera->FOV, window->getAspectRatio(), camera->near, camera->far);
-		this->shader->setMat4Uniform("projection", projectionMatrix);
 
 		glm::mat4 viewMatrix = camera->getViewMatrix();
-		this->shader->setMat4Uniform("view", viewMatrix);
 
 
 		for (int e = 0; e < world->entities.size(); e++)
@@ -37,20 +37,35 @@ namespace RBT
 			RendererComponent* renderer = entity->GetComponent<RendererComponent>();
 			MeshComponent* meshComponent = entity->GetComponent<MeshComponent>();
 			TransformComponent* transform = entity->GetComponent<TransformComponent>();
+			ColorMaterialComponent* colorMaterial = entity->GetComponent<ColorMaterialComponent>();
 
 			if (renderer && meshComponent && transform)
 			{
 				if (renderer->enabled == true)
 				{
-					Mesh mesh = *meshComponent->mesh;
-					glm::mat4 modelMatrix = transform->transform;
-					this->shader->setMat4Uniform("model", modelMatrix);
-					glBindVertexArray(mesh.VAO);
-					glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh.vertices.size());
-					glBindVertexArray(0);
+					if (colorMaterial)
+					{
+						shader = colorShader;
+						shader->bind();
+						shader->setVec3Uniform("color", glm::vec3(colorMaterial->color.R, colorMaterial->color.G, colorMaterial->color.B));
+					}
+
+					if (shader)
+					{
+						shader->setMat4Uniform("projection", projectionMatrix);
+						shader->setMat4Uniform("view", viewMatrix);
+
+						Mesh mesh = *meshComponent->mesh;
+						glm::mat4 modelMatrix = transform->transform;
+						shader->setMat4Uniform("model", modelMatrix);
+						glBindVertexArray(mesh.VAO);
+						glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh.vertices.size());
+						glBindVertexArray(0);
+
+						shader->unbind();
+					}
 				}
 			}
 		}
-		shader->unbind();
 	}
 }

@@ -14,6 +14,7 @@ namespace RBT
 			void bind();
 			void unbind();
 			void setMat4Uniform(std::string name, glm::mat4 uniform);
+			void setVec3Uniform(std::string name, glm::vec3 uniform);
 		private:
 			int getUniformLocation(std::string name);
 

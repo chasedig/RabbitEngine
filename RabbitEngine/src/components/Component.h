@@ -7,6 +7,5 @@ namespace RBT
 	{
 		Entity* entity;
 		virtual ~Component() {};
-		const char* c = "hi";
 	};
 }

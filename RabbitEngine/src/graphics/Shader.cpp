@@ -56,6 +56,11 @@ namespace RBT
 		glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(uniform));
     }
 
+	void Shader::setVec3Uniform(std::string name, glm::vec3 uniform)
+	{
+		glUniform3fv(getUniformLocation(name), 1, glm::value_ptr(uniform));
+	}
+
 	void createShader(std::string filename, int shaderId)
 	{
 		std::string source = readShader(filename);
