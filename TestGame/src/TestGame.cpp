@@ -3,7 +3,7 @@
 #include <components/MeshComponent.h>
 #include <components/RendererComponent.h>
 #include <components/TransformComponent.h>
-#include <windows.h>
+//#include <windows.h>
 #include <components/ColorMaterialComponent.h>
 
 using namespace RBT;
@@ -18,7 +18,7 @@ int main()
 	std::thread thread([engine, mesh]()
 	{
 		engine->window->setTitle("RabbitEngine DEMO | Triangle Distribution");
-		for (int x = 0; x < 50000; x++)
+		for (int x = 0; x < 5000; x++)
 		{
 			Entity* entity = new Entity();
 			engine->world->entities.push_back(entity);
@@ -32,7 +32,7 @@ int main()
 			transform->transform = glm::translate(transform->transform, glm::vec3(0, (rand() % 100 + -50) - 5, 0));
 			entity->SetComponent(transform);
 			entity->SetComponent(new ColorMaterialComponent(Color(rand() / double(RAND_MAX), rand() / double(RAND_MAX), rand() / double(RAND_MAX))));
-			Sleep(1);
+			//Sleep(1);
 		}
 	});
 	engine->Run();
