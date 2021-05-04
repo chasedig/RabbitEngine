@@ -31,7 +31,6 @@ int main()
 			transform->transform = glm::translate(transform->transform, glm::vec3(0, (rand() % 100 + -50) - 5, 0));
 			entity->SetComponent(transform);
 			entity->SetComponent(new ColorMaterialComponent(Color(rand() / double(RAND_MAX), rand() / double(RAND_MAX), rand() / double(RAND_MAX))));
-			Sleep(1);
 		}
 	});
 	engine->Run();
