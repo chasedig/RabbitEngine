@@ -1,4 +1,4 @@
-#include "Mesh.h"
+#include <RBT/graphics/Mesh.h>
 #include <glad/glad.h>
 #include <iostream>
 
