@@ -118,7 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -147,7 +147,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -183,24 +183,24 @@
     <ClCompile Include="src\RabbitEngine.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\components\ColorMaterialComponent.h" />
-    <ClInclude Include="src\components\Component.h" />
-    <ClInclude Include="src\components\TransformComponent.h" />
-    <ClInclude Include="src\components\RendererComponent.h" />
-    <ClInclude Include="src\components\MeshComponent.h" />
-    <ClInclude Include="src\core\Entity.h" />
-    <ClInclude Include="src\core\Logger.h" />
-    <ClInclude Include="src\core\World.h" />
-    <ClInclude Include="src\Engine.h" />
+    <ClInclude Include="include\RBT\components\ColorMaterialComponent.h" />
+    <ClInclude Include="include\RBT\components\Component.h" />
+    <ClInclude Include="include\RBT\components\TransformComponent.h" />
+    <ClInclude Include="include\RBT\components\RendererComponent.h" />
+    <ClInclude Include="include\RBT\components\MeshComponent.h" />
+    <ClInclude Include="include\RBT\core\Entity.h" />
+    <ClInclude Include="include\RBT\core\Logger.h" />
+    <ClInclude Include="include\RBT\core\World.h" />
+    <ClInclude Include="include\RBT\Engine.h" />
     <ClInclude Include="src\event\Listener.h" />
-    <ClInclude Include="src\graphics\Camera.h" />
-    <ClInclude Include="src\graphics\Color.h" />
-    <ClInclude Include="src\graphics\Mesh.h" />
-    <ClInclude Include="src\graphics\RendererSystem.h" />
-    <ClInclude Include="src\graphics\Shader.h" />
-    <ClInclude Include="src\graphics\Vertex.h" />
-    <ClInclude Include="src\core\Window.h" />
-    <ClInclude Include="src\core\System.h" />
+    <ClInclude Include="include\RBT\graphics\Camera.h" />
+    <ClInclude Include="include\RBT\graphics\Color.h" />
+    <ClInclude Include="include\RBT\graphics\Mesh.h" />
+    <ClInclude Include="include\RBT\graphics\RendererSystem.h" />
+    <ClInclude Include="include\RBT\graphics\Shader.h" />
+    <ClInclude Include="include\RBT\graphics\Vertex.h" />
+    <ClInclude Include="include\RBT\core\Window.h" />
+    <ClInclude Include="include\RBT\core\System.h" />
     <ClInclude Include="src\event\Event.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

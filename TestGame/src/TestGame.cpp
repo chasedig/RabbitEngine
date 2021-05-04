@@ -1,10 +1,9 @@
-#include <Engine.h>
-#include <graphics/Mesh.h>
-#include <components/MeshComponent.h>
-#include <components/RendererComponent.h>
-#include <components/TransformComponent.h>
-//#include <windows.h>
-#include <components/ColorMaterialComponent.h>
+#include <RBT/Engine.h>
+#include <RBT/graphics/Mesh.h>
+#include <RBT/components/MeshComponent.h>
+#include <RBT/components/RendererComponent.h>
+#include <RBT/components/TransformComponent.h>
+#include <RBT/components/ColorMaterialComponent.h>
 
 using namespace RBT;
 
@@ -32,7 +31,6 @@ int main()
 			transform->transform = glm::translate(transform->transform, glm::vec3(0, (rand() % 100 + -50) - 5, 0));
 			entity->SetComponent(transform);
 			entity->SetComponent(new ColorMaterialComponent(Color(rand() / double(RAND_MAX), rand() / double(RAND_MAX), rand() / double(RAND_MAX))));
-			//Sleep(1);
 		}
 	});
 	engine->Run();

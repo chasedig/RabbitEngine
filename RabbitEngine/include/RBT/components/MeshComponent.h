@@ -1,8 +1,8 @@
 #pragma once
 #include "Component.h"
 #include <vector>
-#include <graphics/Vertex.h>
-#include <graphics/Mesh.h>
+#include <RBT/graphics/Vertex.h>
+#include <RBT/graphics/Mesh.h>
 namespace RBT
 {
 	struct MeshComponent : Component

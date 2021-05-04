@@ -1,10 +1,10 @@
-#include "RendererSystem.h"
+#include <RBT/graphics/RendererSystem.h>
 #include "glad/glad.h"
-#include "core/Window.h"
-#include "components/MeshComponent.h"
-#include "components/RendererComponent.h"
-#include "components/TransformComponent.h"
-#include <components/ColorMaterialComponent.h>
+#include <RBT/core/Window.h>
+#include <RBT/components/MeshComponent.h>
+#include <RBT/components/RendererComponent.h>
+#include <RBT/components/TransformComponent.h>
+#include <RBT/components/ColorMaterialComponent.h>
 namespace RBT
 {
 

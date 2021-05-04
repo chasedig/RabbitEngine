@@ -1,10 +1,10 @@
 #pragma once
 #include <vector>
-#include <graphics/Mesh.h>
-#include <graphics/Shader.h>
-#include <graphics/Camera.h>
-#include <core/World.h>
-#include <core/System.h>
+#include <RBT/graphics/Mesh.h>
+#include <RBT/graphics/Shader.h>
+#include <RBT/graphics/Camera.h>
+#include <RBT/core/World.h>
+#include <RBT/core/System.h>
 
 namespace RBT
 {

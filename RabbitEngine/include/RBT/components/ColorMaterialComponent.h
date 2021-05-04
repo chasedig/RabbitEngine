@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-#include <graphics/Color.h>
+#include <RBT/graphics/Color.h>
 namespace RBT
 {
 	struct ColorMaterialComponent : Component

@@ -1,6 +1,6 @@
-#include "Entity.h"
-#include "components/Component.h"
-#include "World.h"
+#include <RBT/core/Entity.h>
+#include <RBT/components/Component.h>
+#include <RBT/core/World.h>
 
 RBT::Entity::Entity()
 {

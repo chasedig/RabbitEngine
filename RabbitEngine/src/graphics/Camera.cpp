@@ -1,4 +1,4 @@
-#include "Camera.h"
+#include <RBT/graphics/Camera.h>
 #include <iostream>
 namespace RBT
 {

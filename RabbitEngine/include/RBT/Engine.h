@@ -1,7 +1,7 @@
 #pragma once
-#include "core/Window.h"
-#include <core/World.h>
-#include <core/System.h>
+#include "RBT/core/Window.h"
+#include "RBT/core/World.h"
+#include "RBT/core/System.h"
 #include <thread>
 
 namespace RBT
