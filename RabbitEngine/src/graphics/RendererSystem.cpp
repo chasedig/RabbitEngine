@@ -46,7 +46,10 @@ namespace RBT
 					if (colorMaterial)
 					{
 						shader = colorShader;
-						shader->bind();
+						if (shader)
+						{
+							shader->bind();
+						}
 						shader->setVec3Uniform("color", glm::vec3(colorMaterial->color.R, colorMaterial->color.G, colorMaterial->color.B));
 					}
 
@@ -59,7 +62,8 @@ namespace RBT
 						glm::mat4 modelMatrix = transform->transform;
 						shader->setMat4Uniform("model", modelMatrix);
 						glBindVertexArray(mesh.VAO);
-						glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh.vertices.size());
+						//glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh.vertices.size());
+						glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
 						glBindVertexArray(0);
 
 						shader->unbind();

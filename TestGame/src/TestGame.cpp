@@ -4,6 +4,7 @@
 #include <RBT/components/RendererComponent.h>
 #include <RBT/components/TransformComponent.h>
 #include <RBT/components/ColorMaterialComponent.h>
+#include <RBT/graphics/AssetLoader.h>
 
 using namespace RBT;
 
@@ -11,8 +12,7 @@ int main()
 {
 	Engine* engine = new Engine();
 	Mesh* mesh;
-	mesh = new Mesh();
-	mesh->vertices = { Vertex(glm::vec3(0,0,0), glm::vec3(0,0,1), glm::vec2(0,0)), Vertex(glm::vec3(1,0,0), glm::vec3(0,0,1), glm::vec2(0,0)), Vertex(glm::vec3(1,1,0), glm::vec3(0,0,1), glm::vec2(0,0)) };
+	mesh = RBT::AssetLoader::LoadMeshFromPath("meshes/suzanne.fbx");
 	mesh->setupMesh();
 	std::thread thread([engine, mesh]()
 	{
@@ -21,6 +21,7 @@ int main()
 		{
 			Entity* entity = new Entity();
 			engine->world->entities.push_back(entity);
+			//MeshComponent* meshComponent = new MeshComponent(mesh);
 			MeshComponent* meshComponent = new MeshComponent(mesh);
 			entity->SetComponent(meshComponent);
 			entity->SetComponent(new RendererComponent());
