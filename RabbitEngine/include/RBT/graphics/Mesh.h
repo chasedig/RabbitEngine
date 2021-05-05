@@ -6,11 +6,11 @@ namespace RBT
 	class Mesh
 	{
 		public:
-			unsigned int VAO, VBO;
-			glm::mat4 modelMatrix;
+			unsigned int VAO, VBO, EBO;
 			std::vector<Vertex> vertices;
+			std::vector<unsigned int> indices;
 			Mesh();
-			Mesh(std::vector<Vertex> vertices);
+			Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices);
 			void setupMesh();
 	};
 }

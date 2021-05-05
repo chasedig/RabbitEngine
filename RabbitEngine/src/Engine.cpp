@@ -18,7 +18,9 @@ void RBT::Engine::Run()
 {
 	while (!glfwWindowShouldClose(window->window))
 	{
+		float startDeltaTick = glfwGetTime();
 		this->Update();
+		this->deltaTick = glfwGetTime() - startDeltaTick;
 	}
 }
 

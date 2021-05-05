@@ -136,8 +136,13 @@
       </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command> XCOPY "$(ProjectDir)Resources\" "$(OutDir)" /E /S /Y</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
+    <CustomBuildStep>
+      <Command> XCOPY "$(ProjectDir)Resources\" "$(OutDir)" /E /S /Y</Command>
+      <Outputs>CUSTOM_BUILD_STEP_OUTPUTS_HACK;%(Outputs)</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -159,7 +164,7 @@
       <AdditionalLibraryDirectories>C:\Users\Chase\source\repos\RabbitEngine\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;assimp.lib;zlib.lib;IrrXML.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
@@ -167,11 +172,17 @@
       </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command> XCOPY "$(ProjectDir)Resources\" "$(OutDir)" /E /S /Y</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
+    <CustomBuildStep>
+      <Command> XCOPY "$(ProjectDir)Resources\" "$(OutDir)" /E /S /Y</Command>
+      <Outputs>CUSTOM_BUILD_STEP_OUTPUTS_HACK;%(Outputs)</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\include\glad\glad.c" />
+    <ClCompile Include="src\graphics\AssetLoader.cpp" />
     <ClCompile Include="src\core\Entity.cpp" />
     <ClCompile Include="src\core\World.cpp" />
     <ClCompile Include="src\Engine.cpp" />
@@ -183,6 +194,7 @@
     <ClCompile Include="src\RabbitEngine.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\RBT\graphics\AssetLoader.h" />
     <ClInclude Include="include\RBT\components\ColorMaterialComponent.h" />
     <ClInclude Include="include\RBT\components\Component.h" />
     <ClInclude Include="include\RBT\components\TransformComponent.h" />

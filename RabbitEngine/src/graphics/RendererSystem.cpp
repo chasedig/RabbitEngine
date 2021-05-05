@@ -18,10 +18,11 @@ namespace RBT
 	void RendererSystem::Update(World* world)
 	{
 		glClearColor(0.0f, 0.5f, 1.0f, 1.0f);
+		glEnable(GL_DEPTH_TEST);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, window->getWidth(), window->getHeight());
-		//glCullFace(GL_BACK);
-		//glEnable(GL_CULL_FACE);
+
+		glCullFace(GL_BACK);
 
 		Shader* shader = NULL;
 
@@ -46,7 +47,10 @@ namespace RBT
 					if (colorMaterial)
 					{
 						shader = colorShader;
-						shader->bind();
+						if (shader)
+						{
+							shader->bind();
+						}
 						shader->setVec3Uniform("color", glm::vec3(colorMaterial->color.R, colorMaterial->color.G, colorMaterial->color.B));
 					}
 
@@ -58,8 +62,19 @@ namespace RBT
 						Mesh mesh = *meshComponent->mesh;
 						glm::mat4 modelMatrix = transform->transform;
 						shader->setMat4Uniform("model", modelMatrix);
+
+						if (renderer->doubleSided == false)
+						{
+							glEnable(GL_CULL_FACE);
+						}
+						else
+						{
+							glDisable(GL_CULL_FACE);
+						}
+
 						glBindVertexArray(mesh.VAO);
-						glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh.vertices.size());
+						//glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh.vertices.size());
+						glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
 						glBindVertexArray(0);
 
 						shader->unbind();

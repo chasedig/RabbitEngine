@@ -7,7 +7,9 @@ namespace RBT
 		RendererComponent()
 		{
 			this->enabled = true;
+			this->doubleSided = false;
 		}
 		bool enabled;
+		bool doubleSided;
 	};
 }
