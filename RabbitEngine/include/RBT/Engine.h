@@ -15,6 +15,7 @@ namespace RBT
 			Window* window;
 			World* world;
 			Camera* camera;
+			float deltaTick = 0;
 		private:
 			void InitializeSystems();
 			void Update();

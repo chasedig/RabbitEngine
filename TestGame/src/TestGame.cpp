@@ -12,27 +12,34 @@ int main()
 {
 	Engine* engine = new Engine();
 	Mesh* mesh;
-	mesh = RBT::AssetLoader::LoadMeshFromPath("meshes/suzanne.fbx");
+	mesh = RBT::AssetLoader::LoadMeshFromPath("meshes/teapot.obj");
 	mesh->setupMesh();
 	std::thread thread([engine, mesh]()
 	{
-		engine->window->setTitle("RabbitEngine DEMO | Triangle Distribution");
-		for (int x = 0; x < 5000; x++)
-		{
+		engine->window->setTitle("TestGame");
+		//for (int x = 0; x < 50; x++)
+		//{
 			Entity* entity = new Entity();
 			engine->world->entities.push_back(entity);
 			//MeshComponent* meshComponent = new MeshComponent(mesh);
 			MeshComponent* meshComponent = new MeshComponent(mesh);
 			entity->SetComponent(meshComponent);
-			entity->SetComponent(new RendererComponent());
+			RendererComponent* rendererComponent = new RendererComponent();
+			rendererComponent->doubleSided = true;
+			entity->SetComponent(rendererComponent);
 			TransformComponent* transform = new TransformComponent();
-			transform->transform = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -10));
-			transform->transform = glm::rotate(transform->transform, (float)glm::radians((float)x), glm::vec3(0, 1, 0));
-			transform->transform = glm::translate(transform->transform, glm::vec3(0, 0, 10));
-			transform->transform = glm::translate(transform->transform, glm::vec3(0, (rand() % 100 + -50) - 5, 0));
+			//transform->transform = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -10));
+			//transform->transform = glm::rotate(transform->transform, (float)glm::radians((float)x), glm::vec3(0, 1, 0));
+			//transform->transform = glm::translate(transform->transform, glm::vec3(0, 0, 10));
+			//transform->transform = glm::translate(transform->transform, glm::vec3(0, (rand() % 100 + -50) - 5, 0));
+			transform->transform = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -20));
 			entity->SetComponent(transform);
-			entity->SetComponent(new ColorMaterialComponent(Color(rand() / double(RAND_MAX), rand() / double(RAND_MAX), rand() / double(RAND_MAX))));
-		}
+			//entity->SetComponent(new ColorMaterialComponent(Color(rand() / double(RAND_MAX), rand() / double(RAND_MAX), rand() / double(RAND_MAX))));
+			entity->SetComponent(new ColorMaterialComponent(Color::fromRGB(255, 0 ,255)));
+
+			//transform->transform = glm::rotate(transform->transform, (float)glm::radians(180.0), glm::vec3(0, 1, 0));
+
+		//}
 	});
 	engine->Run();
 	thread.detach();

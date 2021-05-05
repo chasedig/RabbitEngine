@@ -13,7 +13,7 @@ Mesh* RBT::AssetLoader::LoadMeshFromPath(std::string filepath)
 
 	Assimp::Importer importer;
 
-	const aiScene* m_scene = importer.ReadFile(filepath.c_str(), aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
+	const aiScene* m_scene = importer.ReadFile(filepath.c_str(), aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals);
 
 	if (!m_scene)
 	{
@@ -32,8 +32,9 @@ Mesh* RBT::AssetLoader::LoadMeshFromPath(std::string filepath)
 		for (int v = 0; v < mMesh->mNumVertices; v++)
 		{
 			const aiVector3D* vPos = &mMesh->mVertices[v];
-			const aiVector3D* vNormal = &mMesh->mNormals[v] ? &mMesh->mNormals[v] : &aZeroV3;
+			const aiVector3D* vNormal = &mMesh->mNormals[v];
 			const aiVector3D* vTexCoord = mMesh->HasTextureCoords(0) ? &mMesh->mTextureCoords[0][v] : &aZeroV3;
+
 
 			Vertex vertex = Vertex(
 				glm::vec3(vPos->x, vPos->y, vPos->z),
