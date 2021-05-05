@@ -5,12 +5,9 @@ Currently in development.
 
 ## Library Credits:
 
-assimp
-
-glad
-
-glfw
-
-glm
+assimp  
+glad   
+glfw  
+glm  
 
 
