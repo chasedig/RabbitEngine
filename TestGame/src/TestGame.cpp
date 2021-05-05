@@ -12,7 +12,7 @@ int main()
 {
 	Engine* engine = new Engine();
 	Mesh* mesh;
-	mesh = RBT::AssetLoader::LoadMeshFromPath("meshes/teapot.obj");
+	mesh = RBT::AssetLoader::LoadMeshFromPath("meshes/suzanne.fbx");
 	mesh->setupMesh();
 	std::thread thread([engine, mesh]()
 	{
@@ -43,7 +43,7 @@ int main()
 
 
 		}
-
+		
 		while (true)
 		{
 			for (Entity* model : models)
@@ -52,6 +52,7 @@ int main()
 				tC->transform = glm::rotate(tC->transform, 0.000001f, glm::vec3(0, 1, 0));
 			}
 		}
+		
 	});
 	engine->Run();
 	thread.detach();
