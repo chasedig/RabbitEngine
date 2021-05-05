@@ -12,7 +12,7 @@ int main()
 {
 	Engine* engine = new Engine();
 	Mesh* mesh;
-	mesh = RBT::AssetLoader::LoadMeshFromPath("meshes/suzanne.fbx");
+	mesh = RBT::AssetLoader::LoadMeshFromPath("meshes/teapot.fbx");
 	mesh->setupMesh();
 	std::thread thread([engine, mesh]()
 	{
