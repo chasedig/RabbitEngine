@@ -7,7 +7,7 @@ namespace RBT
 		this->FOV = FOV;
 		this->near = near;
 		this->far = far;
-		this->position = glm::vec3(0.0f, 0.0f, -10);
+		this->position = glm::vec3(0.0f, 10, -10);
 		this->front = glm::vec3();
 		this->right = glm::vec3();
 		this->up = glm::vec3();

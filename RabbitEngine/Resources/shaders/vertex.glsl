@@ -11,7 +11,7 @@ uniform mat4 model, view, projection;
 
 void main()
 {
-	Normal = vNormal;
+	Normal = mat3(transpose(inverse(model)))* vNormal;
 	FragPosition = vec3(model * vec4(position, 1.0));
 
 	gl_Position = projection * view * model * vec4(position, 1.0f);

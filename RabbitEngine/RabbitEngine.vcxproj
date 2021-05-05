@@ -194,6 +194,7 @@
     <ClCompile Include="src\RabbitEngine.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\RBT\components\LightComponent.h" />
     <ClInclude Include="include\RBT\graphics\AssetLoader.h" />
     <ClInclude Include="include\RBT\components\ColorMaterialComponent.h" />
     <ClInclude Include="include\RBT\components\Component.h" />

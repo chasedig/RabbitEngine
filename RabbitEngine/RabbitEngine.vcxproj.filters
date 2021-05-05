@@ -110,5 +110,8 @@
     <ClInclude Include="include\RBT\graphics\AssetLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\RBT\components\LightComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
