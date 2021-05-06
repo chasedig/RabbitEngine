@@ -128,7 +128,7 @@
       <AdditionalLibraryDirectories>C:\Users\Chase\source\repos\RabbitEngine\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;assimp.lib;zlib.lib;IrrXML.lib;opengl32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;zlib.lib;IrrXMLd.lib;opengl32.lib;assimp-vc142-mtd.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
@@ -164,7 +164,7 @@
       <AdditionalLibraryDirectories>C:\Users\Chase\source\repos\RabbitEngine\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;assimp.lib;zlib.lib;IrrXML.lib;opengl32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;zlib.lib;IrrXML.lib;opengl32.lib;assimp-vc142-mt.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
