@@ -5,25 +5,37 @@
 #include <RBT/components/TransformComponent.h>
 #include <RBT/components/ColorMaterialComponent.h>
 #include <RBT/graphics/AssetLoader.h>
+#include <RBT/core/Entity.h>
 
 using namespace RBT;
 
 int main()
 {
 	Engine* engine = new Engine();
-	Mesh* mesh;
-	mesh = RBT::AssetLoader::LoadMeshFromPath("meshes/teapot.fbx");
-	mesh->setupMesh();
-	std::thread thread([engine, mesh]()
+	Mesh* teapot_mesh;
+	teapot_mesh = RBT::AssetLoader::LoadMeshFromPath("meshes/teapot.fbx");
+	teapot_mesh->setupMesh();
+	Mesh* monkey_mesh;
+	monkey_mesh = RBT::AssetLoader::LoadMeshFromPath("meshes/cube.fbx");
+	monkey_mesh->setupMesh();
+	std::thread thread([engine, teapot_mesh, monkey_mesh]()
 	{
 		engine->window->setTitle("Spinning Teapots");
 		std::vector<Entity*> models;
 		for (int x = 0; x < 10; x++)
 		{
 			Entity* entity = new Entity();
-			engine->world->entities.push_back(entity);
+			engine->world->AddEntity(entity);
 			//MeshComponent* meshComponent = new MeshComponent(mesh);
-			MeshComponent* meshComponent = new MeshComponent(mesh);
+			MeshComponent* meshComponent;
+			if (x % 2 == 0)
+			{
+				meshComponent = new MeshComponent(teapot_mesh);
+			}
+			else
+			{
+				meshComponent = new MeshComponent(monkey_mesh);
+			}
 			entity->SetComponent(meshComponent);
 			RendererComponent* rendererComponent = new RendererComponent();
 			rendererComponent->doubleSided = true;
@@ -40,7 +52,6 @@ int main()
 			models.push_back(entity);
 			//entity->SetComponent(new ColorMaterialComponent(Color::fromRGB(0, 255, 0)));
 			//entity->SetComponent(new ColorMaterialComponent(Color::fromRGB(255, 0, 0)));
-
 
 		}
 		
