@@ -1,56 +1,32 @@
 #pragma once
 #include "RBT/components/Component.h"
 #include <iostream>
-#include <map>
-#include <typeindex>
-#include <unordered_map>
+#include <RBT/core/World.h>
 namespace RBT
 {
 
-	class World; // Forward declaration
+	class World;
 
 	class Entity
 	{
 	public:
-		Entity();
-		template<typename ComponentType>
-		ComponentType* GetComponent()
+		World* world;
+
+		template<typename ComponentType> ComponentType* GetComponent()
 		{
-			if (components[typeid(ComponentType)])
-			{
-				ComponentType* derived = dynamic_cast<ComponentType*>(components[typeid(ComponentType)]);
-				if (derived)
-				{
-					return derived;
-				}
-			}
-			return NULL;
+			return this->world->GetComponent<ComponentType>(this);
 		}
 
 		template<typename ComponentType>
-		void SetComponent(ComponentType* component)
+		void SetComponent(ComponentType component)
 		{
-			auto* existingComponent = this->GetComponent<ComponentType>();
-			if (existingComponent)
-			{
-				this->RemoveComponent<ComponentType>();
-			}
-			component->entity = this;
-			components[typeid(ComponentType)] = component;
+			this->world->SetComponent(this, component);
 		}
 
 		template<typename ComponentType>
 		void RemoveComponent()
 		{
-			ComponentType* existingComponent = this->GetComponent<ComponentType>();
-			if (existingComponent)
-			{
-				delete existingComponent;
-				components[typeid(ComponentType)] = NULL;
-			}
+			this->world->RemoveComponent<ComponentType>(this);
 		}
-
-		World* world;
-		std::unordered_map<std::type_index, Component*> components;
 	};
 };

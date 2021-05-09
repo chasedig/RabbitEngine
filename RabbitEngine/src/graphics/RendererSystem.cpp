@@ -6,6 +6,7 @@
 #include <RBT/components/TransformComponent.h>
 #include <RBT/components/ColorMaterialComponent.h>
 #include <RBT/components/PointLightComponent.h>
+#include <RBT/core/Entity.h>
 namespace RBT
 {
 
@@ -35,9 +36,8 @@ namespace RBT
 		std::vector<PointLightComponent*> closestPointLights;
 
 
-		for (int e = 0; e < world->entities.size(); e++)
+		for (Entity* entity : world->entities)
 		{
-			Entity* entity = world->entities[e];
 			RendererComponent* renderer = entity->GetComponent<RendererComponent>();
 			MeshComponent* meshComponent = entity->GetComponent<MeshComponent>();
 			TransformComponent* transform = entity->GetComponent<TransformComponent>();

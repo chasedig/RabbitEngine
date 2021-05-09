@@ -5,6 +5,7 @@
 #include <RBT/components/TransformComponent.h>
 #include <RBT/components/ColorMaterialComponent.h>
 #include <RBT/graphics/AssetLoader.h>
+#include <RBT/core/Entity.h>
 
 using namespace RBT;
 
@@ -24,7 +25,7 @@ int main()
 		for (int x = 0; x < 10; x++)
 		{
 			Entity* entity = new Entity();
-			engine->world->entities.push_back(entity);
+			engine->world->AddEntity(entity);
 			//MeshComponent* meshComponent = new MeshComponent(mesh);
 			MeshComponent* meshComponent;
 			if (x % 2 == 0)
@@ -51,7 +52,6 @@ int main()
 			models.push_back(entity);
 			//entity->SetComponent(new ColorMaterialComponent(Color::fromRGB(0, 255, 0)));
 			//entity->SetComponent(new ColorMaterialComponent(Color::fromRGB(255, 0, 0)));
-
 
 		}
 		
