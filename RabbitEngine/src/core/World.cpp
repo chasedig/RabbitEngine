@@ -8,8 +8,18 @@ RBT::World::World()
 
 int RBT::World::AddEntity(Entity* entity)
 {
-	lastEntityID++;
 	entity->world = this;
 	this->entities.push_back(entity);
 	return this->entities.size() - 1;
+}
+
+void RBT::World::RemoveEntity(int id)
+{
+	Entity* entity = this->entities[id];
+	if (entity)
+	{
+		this->entities.erase(this->entities.begin() + id);
+		this->components.erase(entity);
+		delete entity;
+	}
 }

@@ -15,6 +15,8 @@ namespace RBT
 			std::map<Entity*, std::map<std::type_index, Component*>> components;
 			
 			int AddEntity(Entity* entity);
+			void RemoveEntity(int id);
+
 			template<typename ComponentType> ComponentType* GetComponent(Entity* entity)
 			{
 				Component* component = components[entity][typeid(ComponentType)];
@@ -54,6 +56,5 @@ namespace RBT
 				}
 			}
 		private:
-			unsigned int lastEntityID = 0;
 	};
 }
