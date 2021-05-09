@@ -5,6 +5,7 @@
 #include <RBT/components/RendererComponent.h>
 #include <RBT/components/TransformComponent.h>
 #include <RBT/components/ColorMaterialComponent.h>
+#include <RBT/components/PointLightComponent.h>
 namespace RBT
 {
 
@@ -31,6 +32,8 @@ namespace RBT
 
 		glm::mat4 viewMatrix = camera->getViewMatrix();
 
+		std::vector<PointLightComponent*> closestPointLights;
+
 
 		for (int e = 0; e < world->entities.size(); e++)
 		{
@@ -39,6 +42,8 @@ namespace RBT
 			MeshComponent* meshComponent = entity->GetComponent<MeshComponent>();
 			TransformComponent* transform = entity->GetComponent<TransformComponent>();
 			ColorMaterialComponent* colorMaterial = entity->GetComponent<ColorMaterialComponent>();
+
+
 
 			if (renderer && meshComponent && transform)
 			{

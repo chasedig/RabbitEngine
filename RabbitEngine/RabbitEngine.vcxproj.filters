@@ -113,5 +113,8 @@
     <ClInclude Include="include\RBT\components\LightComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\RBT\components\PointLightComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

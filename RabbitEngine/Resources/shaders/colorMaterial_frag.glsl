@@ -29,9 +29,9 @@ vec3 getAmbient()
 
 void main()
 {
-	vec3 lightPosition = vec3(0.0, 10.0, 10.0);
+	vec3 lightPosition = vec3(0.0, 10.0, -10.0);
 	vec3 lightColor = vec3(1.0, 1.0, 1.0);
-	float lightPower = 10;
+	float lightPower = 20;
 
 	//vec3 ambient = lightPower * 1/length(lightPosition - FragPosition) * lightColor;
 
