@@ -51,7 +51,17 @@ namespace RBT
 		return glGetUniformLocation(this->program, &name[0]);
 	}
 
-    void Shader::setMat4Uniform(std::string name, glm::mat4 uniform)
+	void Shader::setIntUniform(std::string name, int uniform)
+	{
+		glUniform1i(getUniformLocation(name), uniform);
+	}
+
+	void Shader::setFloatUniform(std::string name, float uniform)
+	{
+		glUniform1f(getUniformLocation(name), uniform);
+	}
+
+	void Shader::setMat4Uniform(std::string name, glm::mat4 uniform)
     {
 		glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(uniform));
     }

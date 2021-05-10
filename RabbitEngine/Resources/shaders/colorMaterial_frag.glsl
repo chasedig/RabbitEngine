@@ -4,6 +4,18 @@ out vec4 FragColor;
 in vec3 Normal;
 in vec3 FragPosition;
 
+struct PointLight
+{
+	vec3 position;
+	vec3 color;
+	float power;
+};
+
+#define MAX_POINT_LIGHTS 4
+
+uniform PointLight pointLights[MAX_POINT_LIGHTS];
+uniform int N_POINT_LIGHTS;
+
 uniform vec3 color;
 
 float getAttenuatedPower(float lightPower, vec3 lightPosition, vec3 fragPosition)
@@ -11,7 +23,7 @@ float getAttenuatedPower(float lightPower, vec3 lightPosition, vec3 fragPosition
 	return lightPower * (1 / length(lightPosition - fragPosition));
 }
 
-vec3 getDiffuse(vec3 lightPosition, float lightPower, vec3 lightColor, vec3 normal, vec3 fragPosition)
+vec3 getPointLightDiffuse(vec3 lightPosition, float lightPower, vec3 lightColor, vec3 normal, vec3 fragPosition)
 {
 	vec3 norm = normalize(normal);
 	vec3 lightDir = normalize(lightPosition - fragPosition);
@@ -34,11 +46,17 @@ void main()
 	float lightPower = 10;
 
 	//vec3 ambient = lightPower * 1/length(lightPosition - FragPosition) * lightColor;
-
-	vec3 diffuse = getDiffuse(lightPosition, lightPower, lightColor, Normal, FragPosition);
 	vec3 ambient = getAmbient();
 
-	vec3 result = (ambient + diffuse) * color;
+	vec3 totalResult = vec3(0.0f, 0.0f, 0.0f);
 
-	FragColor = vec4(result, 1.0);
+	for (int p = 0; p < N_POINT_LIGHTS; p++)
+	{
+		vec3 diffuse = getPointLightDiffuse(pointLights[p].position, pointLights[p].power, pointLights[p].color, Normal, FragPosition);
+
+		vec3 result = (ambient + diffuse) * color;
+		totalResult += result;
+	}
+
+	FragColor = vec4(totalResult, 1.0);
 }

@@ -2,7 +2,7 @@
 #include <RBT/graphics/Color.h>
 namespace RBT
 {
-	struct LightComponent // Light base class
+	struct LightComponent : Component // Light base class
 	{
 		LightComponent(Color color, float power)
 		{

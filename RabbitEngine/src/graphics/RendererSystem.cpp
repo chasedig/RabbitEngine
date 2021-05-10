@@ -5,8 +5,15 @@
 #include <RBT/components/RendererComponent.h>
 #include <RBT/components/TransformComponent.h>
 #include <RBT/components/ColorMaterialComponent.h>
+#include <RBT/components/PointLightComponent.h>
+#include <RBT/core/Entity.h>
+#include <algorithm>
 namespace RBT
 {
+
+	const int MAX_LIGHTS = 4;
+
+	float GetEntityDistanceFromEntity(Entity* e0, Entity* e1);
 
 	RendererSystem::RendererSystem(Window* window, Camera* camera)
 	{
@@ -31,14 +38,30 @@ namespace RBT
 
 		glm::mat4 viewMatrix = camera->getViewMatrix();
 
+		std::vector<PointLightComponent*> pointLights = world->GetComponentsOfType<PointLightComponent>();
 
-		for (int e = 0; e < world->entities.size(); e++)
+		for (Entity* entity : world->entities)
 		{
 			Entity* entity = world->entities[e];
 			RendererComponent* renderer = entity->GetComponent<RendererComponent>();
 			MeshComponent* meshComponent = entity->GetComponent<MeshComponent>();
 			TransformComponent* transform = entity->GetComponent<TransformComponent>();
 			ColorMaterialComponent* colorMaterial = entity->GetComponent<ColorMaterialComponent>();
+
+
+			std::vector<PointLightComponent*> closestPointLights = pointLights;
+			for (long p = 0; p<closestPointLights.size(); p++)
+			{
+				if (p - 1 > 0)
+				{
+					glm::vec3 translation;
+					if (GetEntityDistanceFromEntity(closestPointLights[p]->entity, entity) < GetEntityDistanceFromEntity(closestPointLights[p-1]->entity, entity))
+					{
+						std::swap(closestPointLights[p], closestPointLights[p - 1]);
+					}
+				}
+			}
+
 
 			if (renderer && meshComponent && transform)
 			{
@@ -63,6 +86,22 @@ namespace RBT
 						glm::mat4 modelMatrix = transform->transform;
 						shader->setMat4Uniform("model", modelMatrix);
 
+						// Lighting
+						int pointLightCount = (int)std::min((int)MAX_LIGHTS, (int)closestPointLights.size());
+
+						shader->setIntUniform("N_POINT_LIGHTS", pointLightCount);
+						for (int p = 0; p < pointLightCount; p++)
+						{
+							TransformComponent* pointLightTransform = closestPointLights[p]->entity->GetComponent<TransformComponent>();
+							if (pointLightTransform)
+							{
+								std::string pointLightIndexAccess = "pointLights[" + std::to_string(p) + "]";
+								shader->setVec3Uniform(pointLightIndexAccess + ".position", pointLightTransform->transform[3]);
+								shader->setVec3Uniform(pointLightIndexAccess + ".color", glm::vec3(closestPointLights[p]->color.R, closestPointLights[p]->color.G, closestPointLights[p]->color.B));
+								shader->setFloatUniform(pointLightIndexAccess + ".power", closestPointLights[p]->power);
+							}
+						}
+
 						if (renderer->doubleSided == false)
 						{
 							glEnable(GL_CULL_FACE);
@@ -82,5 +121,10 @@ namespace RBT
 				}
 			}
 		}
+	}
+
+	float GetEntityDistanceFromEntity(Entity* e0, Entity* e1)
+	{
+		return glm::length(e0->GetComponent<TransformComponent>()->transform[3]) - glm::length(e0->GetComponent<TransformComponent>()->transform[3]);
 	}
 }

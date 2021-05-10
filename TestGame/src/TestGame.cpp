@@ -5,25 +5,39 @@
 #include <RBT/components/TransformComponent.h>
 #include <RBT/components/ColorMaterialComponent.h>
 #include <RBT/graphics/AssetLoader.h>
+#include <RBT/core/Entity.h>
+#include <RBT/components/PointLightComponent.h>
 
 using namespace RBT;
 
 int main()
 {
 	Engine* engine = new Engine();
-	Mesh* mesh;
-	mesh = RBT::AssetLoader::LoadMeshFromPath("meshes/teapot.fbx");
-	mesh->setupMesh();
-	std::thread thread([engine, mesh]()
+	Mesh* teapot_mesh;
+	teapot_mesh = RBT::AssetLoader::LoadMeshFromPath("meshes/teapot.fbx");
+	teapot_mesh->setupMesh();
+	Mesh* cube_mesh;
+	cube_mesh = RBT::AssetLoader::LoadMeshFromPath("meshes/cube.fbx");
+	cube_mesh->setupMesh();
+	std::thread thread([engine, teapot_mesh, cube_mesh]()
 	{
 		engine->window->setTitle("Spinning Teapots");
+
 		std::vector<Entity*> models;
 		for (int x = 0; x < 10; x++)
 		{
 			Entity* entity = new Entity();
 			engine->world->entities.push_back(entity);
 			//MeshComponent* meshComponent = new MeshComponent(mesh);
-			MeshComponent* meshComponent = new MeshComponent(mesh);
+			MeshComponent* meshComponent;
+			if (x % 2 == 0)
+			{
+				meshComponent = new MeshComponent(teapot_mesh);
+			}
+			else
+			{
+				meshComponent = new MeshComponent(cube_mesh);
+			}
 			entity->SetComponent(meshComponent);
 			RendererComponent* rendererComponent = new RendererComponent();
 			rendererComponent->doubleSided = true;
@@ -32,6 +46,14 @@ int main()
 			transform->transform = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -10));
 			transform->transform = glm::rotate(transform->transform, (float)glm::radians((float)x*36), glm::vec3(0, 1, 0));
 			transform->transform = glm::translate(transform->transform, glm::vec3(0, 0, 10));
+			Entity* light = new Entity();
+			engine->world->AddEntity(light);
+			Color lightColor = Color(rand() / double(RAND_MAX), rand() / double(RAND_MAX), rand() / double(RAND_MAX));
+			light->SetComponent(new RendererComponent());
+			light->SetComponent(new MeshComponent(cube_mesh));
+			light->SetComponent(new ColorMaterialComponent(lightColor));
+			light->SetComponent(new PointLightComponent(lightColor, 10.0f));
+			light->SetComponent(new TransformComponent(glm::translate(transform->transform, glm::vec3(0.0f, 5.0f, 0.0f))));
 			//transform->transform = glm::rotate(transform->transform, (float)glm::radians(180.0), glm::vec3(0, 1, 0));
 			//transform->transform = glm::translate(transform->transform, glm::vec3(0, (rand() % 100 + -50) - 5, 0));
 			//transform->transform = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -20));
