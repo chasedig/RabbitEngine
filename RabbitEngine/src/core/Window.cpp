@@ -78,7 +78,7 @@ namespace RBT
 
 	float Window::getAspectRatio()
 	{
-		return (float)this->width / (float)this->height; // Cast to float! Damn integer division is at it again...
+		return (float)this->width / (float)this->height; // Cast to float! Integer division is at it again...
 	}
 
 	int Window::getWidth()

@@ -42,7 +42,6 @@ namespace RBT
 
 		for (Entity* entity : world->entities)
 		{
-			Entity* entity = world->entities[e];
 			RendererComponent* renderer = entity->GetComponent<RendererComponent>();
 			MeshComponent* meshComponent = entity->GetComponent<MeshComponent>();
 			TransformComponent* transform = entity->GetComponent<TransformComponent>();

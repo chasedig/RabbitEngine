@@ -1,7 +1,12 @@
 #pragma once
-#include "Entity.h"
+#include <map>
+#include <typeindex>
+#include <RBT/components/Component.h>
+#include <vector>
 namespace RBT
 {
+	class Entity;
+
 	class World
 	{
 		public:
