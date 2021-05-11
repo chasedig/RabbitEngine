@@ -10,17 +10,15 @@ struct PointLight
 	vec3 color;
 	float power;
 };
-
-#define MAX_POINT_LIGHTS 4
-
-uniform PointLight pointLights[MAX_POINT_LIGHTS];
-uniform int N_POINT_LIGHTS;
+#define MAX_LIGHTS 4
+uniform PointLight pointLights[MAX_LIGHTS];
+float PI = 3.1415926;
 
 uniform vec3 color;
 
 float getAttenuatedPower(float lightPower, vec3 lightPosition, vec3 fragPosition)
 {
-	return lightPower * (1 / length(lightPosition - fragPosition));
+	return (lightPower / (pow(length(lightPosition - fragPosition),2)));
 }
 
 vec3 getPointLightDiffuse(vec3 lightPosition, float lightPower, vec3 lightColor, vec3 normal, vec3 fragPosition)
@@ -50,13 +48,15 @@ void main()
 
 	vec3 totalResult = vec3(0.0f, 0.0f, 0.0f);
 
-	for (int p = 0; p < N_POINT_LIGHTS; p++)
+	for (int p = 0; p < MAX_LIGHTS; p++)
 	{
 		vec3 diffuse = getPointLightDiffuse(pointLights[p].position, pointLights[p].power, pointLights[p].color, Normal, FragPosition);
 
-		vec3 result = (ambient + diffuse) * color;
+		vec3 result = (diffuse) * color;
 		totalResult += result;
 	}
+
+	totalResult += ambient;
 
 	FragColor = vec4(totalResult, 1.0);
 }
